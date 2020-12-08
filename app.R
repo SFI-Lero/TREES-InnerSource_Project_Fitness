@@ -83,7 +83,7 @@ ui <- fluidPage(
                                               style = "color: steelblue")))),
         column(12, checkboxGroupButtons("v2.plus",label = NULL,
                     choices = list('It has useful features/modules that might prevent effort wasted on "Reinventing the Wheel"' = 1, 
-                                   "Maintainers receptive to external contributions" = 1
+                                   "Maintainers are receptive to external contributions" = 1
                                    ),   justified = TRUE,
                                         checkIcon = list(
                                             yes = tags$i(class = "fa fa-check-square", 
