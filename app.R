@@ -73,24 +73,24 @@ ui <- fluidPage(
                                   grid = T, force_edges = TRUE,
                                   choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
         
-        column(3, sliderTextInput("v2.use",label = "The project (or some modules in it) is likely to be widely used by other teams in the company who might (or currently do) depend on it",
+        column(3, sliderTextInput("v2.use",label = "The project (or some modules) could be widely used by other teams in the company who might depend on it",
                                   grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
     ),
     br(),
     fluidRow(
         
         column(12, checkboxGroupButtons("v1.prob",label = "Is any of the following true for the project? (choose all applicable options)",
-                    choices = list("The project has to satisfy very strict requirements" = 1, 
-                                "The Project has confidential IP that should not be exposed" = 2, 
-                                "The Project is in the critical path of important deliverables" = 1),           justified = TRUE,
+                    choices = list("It has to satisfy very strict requirements" = 1, 
+                                "It has confidential IP that should not be exposed" = 2, 
+                                "It is in the critical path of important deliverables" = 1),           justified = TRUE,
                               checkIcon = list(
                                   yes = tags$i(class = "fa fa-check-square", 
                                                style = "color: steelblue"),
                                   no = tags$i(class = "fa fa-square-o", 
                                               style = "color: steelblue")))),
         column(12, checkboxGroupButtons("v2.plus",label = NULL,
-                    choices = list('The project has useful features that might prevent effort wasted on "Reinventing the Wheel"' = 1, 
-                                   "The project might allow new features & product evolution" = 1
+                    choices = list('It has useful features/modules that might prevent effort wasted on "Reinventing the Wheel"' = 1, 
+                                   "Outsiders can add new features to it" = 1
                                    ),   justified = TRUE,
                                         checkIcon = list(
                                             yes = tags$i(class = "fa fa-check-square", 
@@ -186,7 +186,7 @@ ui <- fluidPage(
         column(3, sliderTextInput("v6.flex",label = "Management is willing to support flexible work requirements and value the time spent on cross-departmental contributions",
                                   grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
         
-        column(3, sliderTextInput("v6.time",label = "Management is willing to  set aside time in team members’ work schedules for these new responsibilities",
+        column(3, sliderTextInput("v6.merit",label = "Management supports a meritocratic philosophy that appreciates good contributions from all corners",
                         grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
         
         column(3, sliderTextInput("v6.fail",label = "Management understands the difficulties and can accept experimentation, failure, and repositioning to a reasonable extent",
@@ -246,7 +246,7 @@ server <- function(input, output, session) {
                   as.numeric(maplist[input$v5.conv])+ as.numeric(maplist[input$v5.mentor]) + 
                   as.numeric(maplist[input$v5.work]) + as.numeric(maplist[input$v5.doc]) + 
                   as.numeric(maplist[input$v5.forum])+ as.numeric(maplist[input$v5.review]))/8
-        v6 = (as.numeric(maplist[input$v6.flex]) + as.numeric(maplist[input$v6.time]) + 
+        v6 = (as.numeric(maplist[input$v6.flex]) + as.numeric(maplist[input$v6.merit]) + 
                   as.numeric(maplist[input$v6.reward])+ as.numeric(maplist[input$v6.fail]))/4
         
         data <- as.data.frame(matrix(c(v1, v2, v3, v4, v5, v6), ncol=6))
@@ -279,7 +279,7 @@ server <- function(input, output, session) {
               as.numeric(maplist[input$v5.conv])+ as.numeric(maplist[input$v5.mentor]))*0.80
     v6 = (as.numeric(maplist[input$v5.work]) + as.numeric(maplist[input$v5.doc]) +
               as.numeric(maplist[input$v5.forum])+ as.numeric(maplist[input$v5.review]))*0.80
-    v7 = (as.numeric(maplist[input$v6.flex]) + as.numeric(maplist[input$v6.time]) +
+    v7 = (as.numeric(maplist[input$v6.flex]) + as.numeric(maplist[input$v6.merit]) +
               as.numeric(maplist[input$v6.reward])+ as.numeric(maplist[input$v6.fail]))*0.85
     score = round((v1 + v2 + v3 + v4 + v5 + v6 + v7)/7.7 - 2.5, 3)
     return(score)
