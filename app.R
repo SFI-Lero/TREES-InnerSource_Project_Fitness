@@ -36,18 +36,20 @@ if (!(require(shinyWidgets))){
     require(shinyWidgets)
 }
 
-# Define UI for application that draws a histogram
+# Define UI for the fitness tracker
 ui <- fluidPage(
-    # tags$head(tags$style(HTML('div.col-sm-3 {padding: 0px;}'))),
-
+    
     # Application title
     title = "InnerSource Project Fitness Assessment",
     useSweetAlert(),
     
     h1("InnerSource Project Fitness Assessment Questionnaire"),
-
+    
+    # All Questions are listed below
+    
     h3("Technology compatibility"),
     br(),
+    
     fluidRow(
         column(3, sliderTextInput("v2.collab",
                                   label = "The project have functionality that is likely to be interesting to developers outside the original development team",
@@ -58,15 +60,6 @@ ui <- fluidPage(
                                "Is it a Minimum Viable Product that works and can be experimented on?",
                                choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
                                checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
-        # 
-        # column(3, selectInput("v1.sdlc", 
-        #                        "In which phase of Software Development Life Cycle is the project at?",
-        #                        choices = list("Requirement Collection" = 1, 
-        #                                       "Design" = 2, 
-        #                                       "Development" = 4,
-        #                                       "Testing" = 5,
-        #                                       "Deployment" = 4,
-        #                                       "Maintenance" = 2))),
         
         column(3, sliderTextInput("v1.value", 
                                   label = "The project is valuable to the company",
@@ -90,22 +83,13 @@ ui <- fluidPage(
                                               style = "color: steelblue")))),
         column(12, checkboxGroupButtons("v2.plus",label = NULL,
                     choices = list('It has useful features/modules that might prevent effort wasted on "Reinventing the Wheel"' = 1, 
-                                   "Outsiders can add new features to it" = 1
+                                   "Maintainers are ok with outsiders adding new features to it" = 1
                                    ),   justified = TRUE,
                                         checkIcon = list(
                                             yes = tags$i(class = "fa fa-check-square", 
                                                          style = "color: steelblue"),
                                             no = tags$i(class = "fa fa-square-o", 
                                                         style = "color: steelblue")))),
-        
-        # column(3, sliderTextInput("v2.evo",
-        #                       label = "The project might benefit from being extended by outsiders in ways that the original team could not anticipate",
-        #                       grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
-        
-        # column(3, sliderTextInput("v2.contrib",label = "The project could benefit from having other teams contribute bug fixes, refactoring, useful code or suggestions",
-        #                           grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
-        
-        
     ),
     br(),
     
@@ -196,6 +180,8 @@ ui <- fluidPage(
                                   grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
     ),
     
+    # Action Buttons are listed below
+    
     br(),
     fluidRow(
         column(2, switchInput(
@@ -206,17 +192,19 @@ ui <- fluidPage(
         column(2, offset = 1, downloadBttn("saveData",label = "Download Data", 
                                          style = "jelly", color = "success")),
         column(2, offset = 1, downloadBttn("savePlot", label = "Download Plots", style = "jelly")),
-        # column(2, downloadBttn("savelol", label = "Download Lollipop Plot", 
-                               # style = "jelly", color = "royal")),
     ),    
 
-    # Show a plot of the generated distribution
+    # Show Project Score
     br(),
     fluidRow(
         fluidRow(column(7, offset = 2, h3(textOutput("score"))))
 
     ),
+    # For testing: comment if not used
     # fluidRow(column(12, verbatimTextOutput("test"))),
+    
+    # Show Plots
+    
     br(),
     fluidRow(
         column(6,plotOutput("radarplot") ),
@@ -227,10 +215,12 @@ ui <- fluidPage(
 
 )
 
-# Define server logic required to draw a histogram
+# Define server logic 
 server <- function(input, output, session) {
+    # Mapping Likert Scale responses to numbers
     maplist = list("Strongly disagree" = 1, "Disagree" = 2, "Neither agree nor disagree" = 3, "Agree" = 4, "Strongly agree" = 5)
     
+    # Create Data Frame from responses
     getData <- eventReactive(input$go, {
         v1.1 = 5 - sum(as.numeric(input$v1.prob))
         v2.2 = 1 + sum(as.numeric(input$v2.plus))*2
@@ -260,9 +250,10 @@ server <- function(input, output, session) {
         return(data)
     })
     
-    # For Testing - when things break
+    # For Testing - when things break: comment if not used
     # output$test = renderPrint({ print(input)})
 
+    # Calculate Project Score - weighted by responses from the Survey
     getScore <- eventReactive(input$go, { v1.1 = 5 - sum(as.numeric(input$v1.prob))
      v1 = v2 = v3 = v4 = v5 = v6 = v7 =0
      v1.1 = 5 - sum(as.numeric(input$v1.prob))
@@ -286,6 +277,7 @@ server <- function(input, output, session) {
 
     })
     
+    # Alert
     observeEvent(input$go, {
         if (!input$alert){
         sendSweetAlert(
@@ -296,6 +288,7 @@ server <- function(input, output, session) {
         )}
     })
 
+    # generate plots
     
     gen_radarplot <- reactive({
         par(mar=c(0,0,4,0))
@@ -325,6 +318,8 @@ server <- function(input, output, session) {
             ) + guides(fill=guide_legend(nrow=3, byrow=TRUE))
     })
     
+    # render output 
+    
     output$score <- renderText({ 
         paste("The Estimated Fitness Score of this Project is:", getScore(), "; (Range: 0 to 10)")
     })
@@ -337,6 +332,7 @@ server <- function(input, output, session) {
         gen_lollipopplot()
     })
     
+    # saving data
     output$saveData = downloadHandler(
         filename = function() {
             paste("data", Sys.Date(), as.numeric(input$go) ,"0.csv", sep="_")
@@ -349,6 +345,7 @@ server <- function(input, output, session) {
         }
     )
     
+    # saving plots
     output$savePlot = downloadHandler(
         filename = function() {
             "Rplots.pdf"
