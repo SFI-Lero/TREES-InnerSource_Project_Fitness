@@ -10,4 +10,4 @@ the [Nine Factor Model for InnerSource adoption](https://ieeexplore.ieee.org/doc
 1. [Install R](https://www.r-project.org/) if you don't have it.
 1. Open R terminal, type in: `install.packages('shiny')`
 1. Type in: `library(shiny)`
-1. Type in: `runGist('3568e05ab728b33ec8624c3c56d2b374')`
+1. Type in: `runGitHub('tapjdey/InnerSource_Project_Fitness', ref = "main")`
