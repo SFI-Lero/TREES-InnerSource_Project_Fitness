@@ -82,15 +82,15 @@ ui <- fluidPage(
         column(12, checkboxGroupButtons("v1.prob",label = "Is any of the following true for the project? (choose all applicable options)",
                     choices = list("The project has to satisfy very strict requirements" = 1, 
                                 "The Project has confidential IP that should not be exposed" = 2, 
-                                "The Project is in the critical path of important company deliverables" = 1),           justified = TRUE,
+                                "The Project is in the critical path of important deliverables" = 1),           justified = TRUE,
                               checkIcon = list(
                                   yes = tags$i(class = "fa fa-check-square", 
                                                style = "color: steelblue"),
                                   no = tags$i(class = "fa fa-square-o", 
                                               style = "color: steelblue")))),
         column(12, checkboxGroupButtons("v2.plus",label = NULL,
-                    choices = list("The project might allow new features & product evolution" = 1, 
-                                   'The project has useful features that might prevent effort wasted on "Reinventing the Wheel"' = 1
+                    choices = list('The project has useful features that might prevent effort wasted on "Reinventing the Wheel"' = 1, 
+                                   "The project might allow new features & product evolution" = 1
                                    ),   justified = TRUE,
                                         checkIcon = list(
                                             yes = tags$i(class = "fa fa-check-square", 
