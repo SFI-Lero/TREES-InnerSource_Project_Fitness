@@ -189,7 +189,7 @@ ui <- fluidPage(
         )),
         column(2, offset = 1, actionBttn("go",label = "Check Results", 
                                  style = "pill", color = "danger",icon = icon("eye"))),
-        column(2, offset = 1, downloadBttn("saveData",label = "Download Data", 
+        column(2, offset = 1, downloadBttn("saveData",label = "Download Scores", 
                                          style = "jelly", color = "success")),
         column(2, offset = 1, downloadBttn("savePlot", label = "Download Plots", style = "jelly")),
     ),    
@@ -340,7 +340,7 @@ server <- function(input, output, session) {
         content = function(file) {
             dataout = getData()
             dataout = dataout %>% slice(3)
-            dataout$Score = getScore()
+            dataout$Final.Score = getScore()
             write.csv(dataout, file, row.names = F)
         }
     )
