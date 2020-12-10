@@ -11,10 +11,6 @@ if (!(require(shiny))){
     install.packages("shiny", quiet = T)
     require(shiny)
 }
-if (!(require(shiny.i18n))){
-    install.packages("shiny.i18n", quiet = T)
-    require(shiny.i18n)
-}
 if (!(require(fmsb))){
     install.packages("fmsb", quiet = T)
     require(fmsb)
@@ -40,37 +36,23 @@ if (!(require(shinyWidgets))){
     require(shinyWidgets)
 }
 
-# file with translations
-i18n <- Translator$new(translation_csvs_path = "data")
-# change this to en
-i18n$set_translation_language("en")
-
-
 # Define UI for the fitness tracker
 ui <- fluidPage(
     
-    shiny.i18n::usei18n(i18n),
-    div(style = "float: right;",
-        selectInput('selected_language',
-                    i18n$t("Change language"),
-                    choices = i18n$get_languages(),
-                    selected = i18n$get_key_translation())
-    ),
-    
     # Application title
-    title = i18n$t("InnerSource Project Fitness Assessment"),
+    title = "InnerSource Project Fitness Assessment",
     useSweetAlert(),
     
-    h1(i18n$t("InnerSource Project Fitness Assessment Questionnaire")),
+    h1("InnerSource Project Fitness Assessment Questionnaire"),
     
     # All Questions are listed below
     
-    h3(i18n$t("Technology compatibility")),
+    h3("Technology compatibility"),
     br(),
     
     fluidRow(
         column(3, sliderTextInput("v2.collab",
-                                  label = i18n$t("The project have functionality that is likely to be interesting to developers outside the original development team"),
+                                  label = "The project have functionality that is likely to be interesting to developers outside the original development team",
                                   grid = T, force_edges = TRUE,
                                   choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
         
@@ -235,14 +217,6 @@ ui <- fluidPage(
 
 # Define server logic 
 server <- function(input, output, session) {
-    
-    observeEvent(input$selected_language, {
-        # This print is just for demonstration
-        print(paste("Language change!", input$selected_language))
-        # Here is where we update language in session
-        shiny.i18n::update_lang(session, input$selected_language)
-    })
-    
     # Mapping Likert Scale responses to numbers
     maplist = list("Strongly disagree" = 1, "Disagree" = 2, "Neither agree nor disagree" = 3, "Agree" = 4, "Strongly agree" = 5)
     
