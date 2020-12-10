@@ -45,6 +45,11 @@ i18n <- Translator$new(translation_csvs_path = "data")
 # change this to en
 i18n$set_translation_language("en")
 
+# # Not Working
+# shiny.i18n::usei18n(i18n)
+# likert.choices = c(i18n$t("Strongly disagree"), i18n$t("Disagree"), i18n$t("Neither agree nor disagree"), i18n$t("Agree"), i18n$t("Strongly agree"))
+
+likert.choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree")
 
 # Define UI for the fitness tracker
 ui <- fluidPage(
@@ -63,6 +68,8 @@ ui <- fluidPage(
     
     h1(i18n$t("InnerSource Project Fitness Assessment Questionnaire")),
     
+    h5(i18n$t('#')),
+    
     # All Questions are listed below
     
     h3(i18n$t("Technology compatibility")),
@@ -72,7 +79,7 @@ ui <- fluidPage(
         column(3, sliderTextInput("v2.collab",
                                   label = i18n$t("The project have functionality that is likely to be interesting to developers outside the original development team"),
                                   grid = T, force_edges = TRUE,
-                                  choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  choices = likert.choices)),
         
         column(3, radioGroupButtons("v1.mvp", 
                                "Is it a Minimum Viable Product that works and can be experimented on?",
@@ -82,10 +89,10 @@ ui <- fluidPage(
         column(3, sliderTextInput("v1.value", 
                                   label = "The project is valuable to the company",
                                   grid = T, force_edges = TRUE,
-                                  choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  choices = likert.choices)),
         
         column(3, sliderTextInput("v2.use",label = "The project (or some modules) could be widely used by other teams in the company who might depend on it",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
     ),
     br(),
     fluidRow(
@@ -116,13 +123,13 @@ ui <- fluidPage(
     
     fluidRow(
         column(3, sliderTextInput("v3.mod",label =  "The project is modular enough to make changes easy and safe to make",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v3.doc",label = "All ancillary resources (Adequate Code Documentation, Discussion forum, Bug Tracker, Wiki etc.) are set up for the project",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v3.con",label = "The project has clear and easy-to-find Contribution guidelines, documentation on development environment setup, running tests, etc. making it easy to contribute to",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, radioGroupButtons("v3.vcs", 
                                "Is all of the code stored in a version control repository that makes branches, pull requests, and integration easy?",
@@ -138,7 +145,7 @@ ui <- fluidPage(
         
         
         column(3, sliderTextInput("v4.common",label = "The project uses specialized tools/ framework that outsiders need to learn before they can contribute",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, radioGroupButtons("v4.announce", 
                                "Is there a mechanism for making announcements that anyone in the organization can follow and search? (Examples: Slack, email)",
@@ -156,46 +163,46 @@ ui <- fluidPage(
     br(),
     fluidRow(
         column(3, sliderTextInput("v5.accept",label = "Team Members are ok with accepting code and changes to their code from outsiders",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v5.see",label = "Team Members are ok with having outsiders see their less-than-perfect code",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v5.conv",label = "Team Members are ok with having to conduct conversations (that are sometimes difficult) with outsiders about accepting and rejecting their contributions",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v5.mentor",label = "Team Members are ready to mentor and/or learning to mentor contributors from other teams",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree")))
+                                  grid = T, force_edges = TRUE, choices = likert.choices))
     ),
     
     br(),
     fluidRow(
         column(3, sliderTextInput("v5.work",label = "Team Members are ready to work with outside contributors for fixing any defects on the contributed code",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v5.doc",label = "Team Members are willing to create and maintain documentation for outside contributors",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v5.forum",label = "Team Members are willing to participate in forums and answer questions patiently (instead of offline conversations)",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v5.review",label = "Team Members are willing to do code reviews for outside submissions",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
     ),
     
     br(),
     fluidRow(
         column(3, sliderTextInput("v6.flex",label = "Management is willing to support flexible work requirements and value the time spent on cross-departmental contributions",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v6.merit",label = "Management supports a meritocratic philosophy that appreciates good contributions from all corners",
-                        grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                        grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v6.fail",label = "Management understands the difficulties and can accept experimentation, failure, and repositioning to a reasonable extent",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
         
         column(3, sliderTextInput("v6.reward",label = "Management is willing to recognize and incentivize the efforts for making InnerSource Successful",
-                                  grid = T, force_edges = TRUE, choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"))),
+                                  grid = T, force_edges = TRUE, choices = likert.choices)),
     ),
     
     # Action Buttons are listed below
