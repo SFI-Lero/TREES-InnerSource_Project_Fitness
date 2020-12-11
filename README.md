@@ -11,3 +11,6 @@ the [Nine Factor Model for InnerSource adoption](https://ieeexplore.ieee.org/doc
 1. Open R terminal, type in: `install.packages('shiny')`
 1. Type in: `library(shiny)`
 1. Type in: `runGitHub('tapjdey/InnerSource_Project_Fitness', ref = "main")`
+
+## Known Issue:
+Selections will be cleared for the multiple choice question and the Likert scale based questions when chaning language.
