@@ -11,9 +11,9 @@ if (!(require(shiny))){
     install.packages("shiny", quiet = T)
     require(shiny)
 }
-if (!(require(shiny.i18n()))){
-    install.packages("shiny.i18n()", quiet = T)
-    require(shiny.i18n())
+if (!(require(shiny.i18n))){
+    install.packages("shiny.i18n", quiet = T)
+    require(shiny.i18n)
 }
 if (!(require(fmsb))){
     install.packages("fmsb", quiet = T)
