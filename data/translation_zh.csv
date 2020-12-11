@@ -5,39 +5,50 @@ InnerSource Project Fitness Assessment Questionnaire, 内源项目适应度评�
 Technology compatibility, 技术兼容性
 The project have functionality that is likely to be interesting to developers outside the original development team, 该项目具有的功能可能会让原始开发团队之外的开发人员感兴趣
 ., 选择清单的翻译- Strongly disagree: 非常不同意; Disagree: 不同意; Neither agree nor disagree: 不同意也不反对; Agree: 同意; Strongly agree: 非常同意; yes: 是; no: 无
-It has to satisfy very strict requirements, 它必须满足非常严格的要求
-Is it a Minimum Viable Product that works and can be experimented on?, 它是一个最小的可行产品，它可以对进行实验？
+Is it a Minimum Viable Product that works and can be experimented on?,它是一个最小的可行产品，它可以对进行实验？
 The project is valuable to the company, 该项目对公司很有价值
 The project (or some modules) could be widely used by other teams in the company who might depend on it, 该项目（或某些模块）可能会被公司中可能依赖该项目的其他团队广泛使用
-Is any of the following true for the project? (choose all applicable options), 该项目是否符合以下任何条件？ （选择所有适用的选项）; 选项清单 - It has to satisfy very strict requirements: 它必须满足非常严格的要求; It has confidential IP that should not be exposed: 它具有不应泄露的机密知识产权; It is in the critical path of important deliverables: 它处于重要交付物的关键路径中; It has useful features/modules that might prevent effort wasted on "Reinventing the Wheel": 它具有有用的功能/模块，可以避免在“重新发明轮子”上浪费能量; Maintainers are receptive to external contributions: 维护者接受外部贡献
+Is any of the following true for the project? (choose all applicable options), 该项目是否符合以下任何条件（请选择所有符合条件的选项）？
+It has to satisfy very strict requirements, 它必须满足非常严格的要求
+It has confidential IP that should not be exposed, 它具有不应泄露的机密知识产权
+It is in the critical path of important deliverables, 它处于重要交付物的关键路径中
+It has useful features/modules that might prevent effort wasted on "Reinventing the Wheel", 它具有有用的功能/模块，可以避免在“重新发明轮子”上浪费精力
+Maintainers are receptive to external contributions, 维护者接受外部贡献
 The project is modular enough to make changes easy and safe to make, 该项目具有足够的模块化，可以轻松，安全地进行更改
 "All ancillary resources (Adequate Code Documentation, Discussion forum, Bug Tracker, Wiki etc.) are set up for the project", 为项目设置了所有初始资源（充足的代码文档，讨论论坛，问题跟踪工具，知识库等）
 "The project has clear and easy-to-find Contribution guidelines, documentation on development environment setup, running tests, etc. making it easy to contribute to", 该项目具有明确且易于查找的贡献准则，有关开发环境设置，运行测试的文档等，因此您可以轻松地为其做出贡献
 "Is all of the code stored in a version control repository that makes branches, pull requests, and integration easy?", 所有代码是否都存储在版本控制存储库中，以使创建分支，提取请求和代码集成变得容易？
-Can releases be made frequently and/ or on a time-based schedule?, 可以释放频繁和/或基于时间的时间表进行？
-The project uses specialized tools/ framework that outsiders need to learn before they can contribute, 该项目使用了局外人需要学习的专门工具/框架，他们才能做出贡献
-Is there a mechanism for making announcements that anyone in the organization can follow and search? (Examples: Slack/ email), 是否有发布机构中任何人都可以关注和搜索的公告的机制？ （例如：Slack，电子邮件）
-"Is there a mechanism to record discussions so that new guest contributors can search for all previous Q-A and internal team decisions? (Examples: Slack/ online forum)", 是否有记录讨论的机制，以便新的来宾贡献者可以搜索以前的所有问题和答案以及内部团队的决定（例如，Slack，在线论坛）
+Can releases be made frequently and/ or on a time-based schedule?, 可以频繁发布和/或基于时间安排发布吗？
+The project uses specialized tools/ framework that outsiders need to learn before they can contribute, 该项目使用了一些特殊的专门工具/框架，外部人员需要学习了这些工具/框架才能做出贡献
+Is there a mechanism for making announcements that anyone in the organization can follow and search? (Examples: Slack/ email), 是否存在一种机制来发布组织中任何人都可以关注并进行搜索的公告？（例如：Slack，电子邮件）
+"Is there a mechanism to record discussions so that new guest contributors can search for all previous Q-A and internal team decisions? (Examples: Slack/ online forum)", 是否有记录的讨论机制，以便新来的来宾（Guest）贡献者可以搜索所有来宾（Guest）贡献者的问题和内部团队的决定？ （例如：Slack，在线论坛）
 "Team Members are  willing to accept code from outsiders and make code changes based on their feedback", 团队成员愿意接受外部人员的代码，并根据他们的反馈进行代码更改
-"Team Members are ok with having outsiders see their less-than-perfect code", 团队成员可以让局外人看到他们的代码可能并不完美
-"Team Members are ok with having to conduct conversations (that are sometimes difficult) with outsiders about accepting and rejecting their contributions", 团队成员愿意（有时）与局外人进行艰难的对话，以接受和拒绝他们的贡献
+"Team Members are ok with having outsiders see their less-than-perfect code", 团队成员可以让外界看到他们不完美的代码
+"Team Members are ok with having to conduct conversations (that are sometimes difficult) with outsiders about accepting and rejecting their contributions", 团队成员愿意（有时）与外部人员进行艰难的对话，以接受和拒绝他们的贡献
 "Team Members are ready to mentor and/or learning to mentor contributors from other teams", 团队成员随时准备指导和/或学习如何指导外部贡献者
 "Team Members are ready to work with external contributors for fixing any defects on the contributed code", 团队成员准备与外部贡献者合作，以修复所贡献代码中的任何缺陷
-"Team Members are willing to create and maintain documentation for external contributors", 
-团队成员愿意为外部贡献者创建和维护文档
+"Team Members are willing to create and maintain documentation for external contributors", 团队成员愿意为外部贡献者创建和维护文档
 "Team Members are willing to participate in online forums and answer questions patiently (instead of having offline conversations)", 团队成员愿意参加在线论坛并耐心回答问题（而不是进行离线对话）
 "Team Members are willing to do code reviews for external contributors' submissions", 团队成员愿意为外部贡献者进行代码审查
 "Management is willing to support flexible work requirements and value the time spent on cross-departmental contributions", 管理层愿意支持灵活的工作要求，并重视花在跨部门活动上的时间
-"Management supports a meritocratic philosophy that appreciates good contributions from all corners", 管理层支持英才制, 感谢每个人的良好贡献
+"Management supports a meritocratic philosophy that appreciates good contributions from all corners", 管理层支持一种精英主义(meritocratic)哲学，赞赏各方面的杰出贡献
 "Management understands the difficulties of a cultural change and can accept experimentation, failure, and repositioning to a reasonable extent", 管理层了解文化变革的困难，可以在合理范围内接受试验，失败和重新定位
-"Management is willing to recognize and incentivize the efforts for making InnerSource Successful", 管理层愿意认可并奖励为使InnerSource成功所做的努力
-"Disable Alerts", 禁用警戒
+"Management is willing to recognize and incentivize the efforts for making InnerSource Successful", 管理层愿意认可并奖励为使内源成功所做的努力
+Disable Alerts, 禁用问题提醒
 Check Results, 查看结果
 Download Scores, 下载分数
-Download Plots, 下载图
+Download Plots, 下载图表
 "Thank you!", 谢谢！
-"See the Result Below", 查看结果下面的
-"Visual Breakdown of Fitness Score", 健身得分的视觉细分
-score, 得分了
-Process compatibility, 工艺兼容性
+See the Result Below, 查看结果下面的
+Visual Breakdown of Fitness Score, 适应性得分的视觉细分
+score, 得分
+Process compatibility, 流程兼容性
 People compatibility, 人员兼容性
+Seed Product, 种子产品
+Multiple potential stakeholders, 多个潜在利益相关者
+Ease of Contribution, 易贡献
+Appropriate tools & practices, 适当的工具和实践
+Team Readiness for InnerSource, 团队内源准备度
+Management Support, 管理支持
+The Estimated Fitness Score of this Project is:,该项目的适应度估计得分为：
+; (Range: 0 to 10), ; (范围：0至10)
