@@ -8,7 +8,7 @@ The project have functionality that is likely to be interesting to developers ou
 Is it a Minimum Viable Product that works and can be experimented on?,它是一个最小的可行产品，它可以对进行实验？
 The project is valuable to the company, 该项目对公司很有价值
 The project (or some modules) could be widely used by other teams in the company who might depend on it, 该项目（或某些模块）可能会被公司中可能依赖该项目的其他团队广泛使用
-Is any of the following true for the project? (choose all applicable options), 该项目是否符合以下任何条件（请选择所有符合条件的选项）？
+Is any of the following true for the project? (choose all applicable options), 该项目是否符合以下任何条件？ （选择所有适用的选项）; 选项清单 - It has to satisfy very strict requirements: 它必须满足非常严格的要求; It has confidential IP that should not be exposed: 它具有不应泄露的机密知识产权; It is in the critical path of important deliverables: 它处于重要交付物的关键路径中; It has useful features/modules that might prevent effort wasted on "Reinventing the Wheel": 它具有有用的功能/模块，可以避免在“重新发明轮子”上浪费精力; Maintainers are receptive to external contributions: 维护者接受外部贡献
 It has to satisfy very strict requirements, 它必须满足非常严格的要求
 It has confidential IP that should not be exposed, 它具有不应泄露的机密知识产权
 It is in the critical path of important deliverables, 它处于重要交付物的关键路径中
