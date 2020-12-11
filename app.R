@@ -11,9 +11,9 @@ if (!(require(shiny))){
     install.packages("shiny", quiet = T)
     require(shiny)
 }
-if (!(require(shiny.i18n))){
-    install.packages("shiny.i18n", quiet = T)
-    require(shiny.i18n)
+if (!(require(shiny.i18n()))){
+    install.packages("shiny.i18n()", quiet = T)
+    require(shiny.i18n())
 }
 if (!(require(fmsb))){
     install.packages("fmsb", quiet = T)
@@ -47,217 +47,94 @@ showtext_auto()
 
 
 # file with translations
-i18n <- Translator$new(translation_csvs_path = "data")
-# change this to en
-i18n$set_translation_language("en")
-
-# # Not Working
-# shiny.i18n::usei18n(i18n)
-# likert.choices = c(i18n$t("Strongly disagree"), i18n$t("Disagree"), i18n$t("Neither agree nor disagree"), i18n$t("Agree"), i18n$t("Strongly agree"))
-
-likert.choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree")
+translator <- Translator$new(translation_csvs_path = "data")
 
 # Define UI for the fitness tracker
-ui <- fluidPage(
-    
-    shiny.i18n::usei18n(i18n),
-    div(style = "float: right;",
-        selectInput('selected_language',
-                    i18n$t("Change language"),
-                    choices = i18n$get_languages(),
-                    selected = i18n$get_key_translation())
-    ),
-    
-    # Application title
-    title = i18n$t("InnerSource Project Fitness Assessment"),
-    useSweetAlert(),
-    
-    h1(i18n$t("InnerSource Project Fitness Assessment Questionnaire")),
-    
-    h5(i18n$t('.')),
-    
-    # All Questions are listed below
-    
-    h3(i18n$t("Technology compatibility")),
-    br(),
-    
-    fluidRow(
-        column(3, sliderTextInput("v2.collab",
-                                  label = i18n$t("The project have functionality that is likely to be interesting to developers outside the original development team"),
-                                  grid = T, force_edges = TRUE,
-                                  choices = likert.choices)),
-        
-        column(3, radioGroupButtons("v1.mvp", 
-                                    i18n$t("Is it a Minimum Viable Product that works and can be experimented on?"),
-                                    choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
-                                    checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
-        
-        column(3, sliderTextInput("v1.value", 
-                                  label = i18n$t("The project is valuable to the company"),
-                                  grid = T, force_edges = TRUE,
-                                  choices = likert.choices)),
-        
-        column(3, sliderTextInput("v2.use",label = i18n$t("The project (or some modules) could be widely used by other teams in the company who might depend on it"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-    ),
-    br(),
-    fluidRow(
-        
-        column(12, checkboxGroupButtons("v1.prob",label = i18n$t("Is any of the following true for the project? (choose all applicable options)"),
-                                        choices = list("It has to satisfy very strict requirements" = 1, 
-                                                       "It has confidential IP that should not be exposed" = 2, 
-                                                       "It is in the critical path of important deliverables" = 1),           justified = TRUE,
-                                        checkIcon = list(
-                                            yes = tags$i(class = "fa fa-check-square", 
-                                                         style = "color: steelblue"),
-                                            no = tags$i(class = "fa fa-square-o", 
-                                                        style = "color: steelblue")))),
-        column(12, checkboxGroupButtons("v2.plus",label = NULL,
-                                        choices = list('It has useful features/modules that might prevent effort wasted on "Reinventing the Wheel"' = 1, 
-                                                       "Maintainers are receptive to external contributions" = 1
-                                        ),   justified = TRUE,
-                                        checkIcon = list(
-                                            yes = tags$i(class = "fa fa-check-square", 
-                                                         style = "color: steelblue"),
-                                            no = tags$i(class = "fa fa-square-o", 
-                                                        style = "color: steelblue")))),
-    ),
-    br(),
-    
-    h3(i18n$t("Process compatibility")),
-    br(),
-    
-    fluidRow(
-        column(3, sliderTextInput("v3.mod",label =   i18n$t("The project is modular enough to make changes easy and safe to make"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v3.doc",label = i18n$t("All ancillary resources (Adequate Code Documentation, Discussion forum, Bug Tracker, Wiki etc.) are set up for the project"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v3.con",label = i18n$t("The project has clear and easy-to-find Contribution guidelines, documentation on development environment setup, running tests, etc. making it easy to contribute to"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, radioGroupButtons("v3.vcs", 
-                                    i18n$t("Is all of the code stored in a version control repository that makes branches, pull requests, and integration easy?"),
-                                    choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
-                                    checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
-    ),
-    br(),
-    fluidRow(
-        column(3, radioGroupButtons("v4.release", 
-                                    i18n$t("Can releases be made frequently and/ or on a time-based schedule?"),
-                                    choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
-                                    checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
-        
-        
-        column(3, sliderTextInput("v4.common",label = i18n$t("The project uses specialized tools/ framework that outsiders need to learn before they can contribute"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, radioGroupButtons("v4.announce", 
-                                    i18n$t("Is there a mechanism for making announcements that anyone in the organization can follow and search? (Examples: Slack/ email)"),
-                                    choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
-                                    checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
-        
-        column(3, radioGroupButtons("v4.search", 
-                                    i18n$t("Is there a mechanism to record discussions so that new guest contributors can search for all previous Q-A and internal team decisions? (Examples: Slack/ online forum)"),
-                                    choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
-                                    checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
-    ),
-    
-    br(),
-    h3(i18n$t("People compatibility")),
-    br(),
-    fluidRow(
-        column(3, sliderTextInput("v5.accept",label = i18n$t("Team Members are  willing to accept code from outsiders and make code changes based on their feedback"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v5.see",label = i18n$t("Team Members are ok with having outsiders see their less-than-perfect code"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v5.conv",label = i18n$t("Team Members are ok with having to conduct conversations (that are sometimes difficult) with outsiders about accepting and rejecting their contributions"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v5.mentor",label = i18n$t("Team Members are ready to mentor and/or learning to mentor contributors from other teams"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices))
-    ),
-    
-    br(),
-    fluidRow(
-        column(3, sliderTextInput("v5.work",label = i18n$t("Team Members are ready to work with external contributors for fixing any defects on the contributed code"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v5.doc",label = i18n$t("Team Members are willing to create and maintain documentation for external contributors"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v5.forum",label = i18n$t("Team Members are willing to participate in online forums and answer questions patiently (instead of having offline conversations)"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v5.review",label = i18n$t("Team Members are willing to do code reviews for external contributors' submissions"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-    ),
-    
-    br(),
-    fluidRow(
-        column(3, sliderTextInput("v6.flex",label = i18n$t("Management is willing to support flexible work requirements and value the time spent on cross-departmental contributions"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v6.merit",label = i18n$t("Management supports a meritocratic philosophy that appreciates good contributions from all corners"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v6.fail",label = i18n$t("Management understands the difficulties of a cultural change and can accept experimentation, failure, and repositioning to a reasonable extent"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-        
-        column(3, sliderTextInput("v6.reward",label = i18n$t("Management is willing to recognize and incentivize the efforts for making InnerSource Successful"),
-                                  grid = T, force_edges = TRUE, choices = likert.choices)),
-    ),
-    
-    # Action Buttons are listed below
-    
-    br(),
-    fluidRow(
-        column(2, switchInput(
-            inputId = "alert", label = i18n$t("Disable Alerts")
-        )),
-        column(2, offset = 1, actionBttn("go",label = i18n$t("Check Results"), 
-                                         style = "pill", color = "danger",icon = icon("eye"))),
-        column(2, offset = 1, downloadBttn("saveData",label = i18n$t("Download Scores"), 
-                                           style = "jelly", color = "success")),
-        column(2, offset = 1, downloadBttn("savePlot", label = i18n$t("Download Plots"), style = "jelly")),
-    ),    
-    
-    # Show Project Score
-    br(),
-    fluidRow(
-        fluidRow(column(7, offset = 2, h3(textOutput("score"))))
-        
-    ),
-    # For testing: comment if not used
-    # fluidRow(column(12, verbatimTextOutput("test"))),
-    
-    # Show Plots
-    
-    br(),
-    fluidRow(
-        column(6,plotOutput("radarplot") ),
-        column(6, plotOutput("lolipop"))
-    )
-    
-    
-    
-)
+ui <- uiOutput('page_content')
+
 
 # Define server logic 
 server <- function(input, output, session) {
+  i18n <- reactive({
+    selected <- input$selected_language
+    if (length(selected) > 0 && selected %in% translator$get_languages()) {
+      translator$set_translation_language(selected)
+    }
+    translator
+  })
+  
+  likert.choices = c("Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree")
+  
+  YN.choices = list("Yes" = 1, "No" = 0)
+  v1problist = list("It has to satisfy very strict requirements" = 1, 
+                    "It has confidential IP that should not be exposed" = 2, 
+                    "It is in the critical path of important deliverables" = 1)
+  v2pluslist = list("It has useful features/modules that might prevent effort wasted on 'Reinventing the Wheel" = 1, 
+                    "Maintainers are receptive to external contributions" = 1)
+  # Update Radio Buttons & Check options
+  observeEvent(i18n(), { 
+    names(YN.choices) = i18n()$t(names(YN.choices)) 
+    names(v1problist) = i18n()$t(names(v1problist)) 
+    names(v2pluslist) = i18n()$t(names(v2pluslist)) 
     
-    observeEvent(input$selected_language, {
-        # This print is just for demonstration
-        print(paste("Language change!", input$selected_language))
-        # Here is where we update language in session
-        shiny.i18n::update_lang(session, input$selected_language)
+    updateCheckboxGroupButtons(session, "v1.prob",label = i18n()$t("Is any of the following true for the project? (choose all applicable options)"),
+                         choices = v1problist,
+                         checkIcon = list(
+                           yes = tags$i(class = "fa fa-check-square", 
+                                        style = "color: steelblue"),
+                           no = tags$i(class = "fa fa-square-o", 
+                                       style = "color: steelblue")))
+    
+    updateCheckboxGroupButtons(session, "v2.plus",label = NULL,
+                               choices = v2pluslist,
+                               checkIcon = list(
+                                 yes = tags$i(class = "fa fa-check-square", 
+                                              style = "color: steelblue"),
+                                 no = tags$i(class = "fa fa-square-o", 
+                                             style = "color: steelblue")))
+    
+    updateRadioGroupButtons(session, "v1.mvp", 
+                            i18n()$t("Is it a Minimum Viable Product that works and can be experimented on?"),
+                            choices = YN.choices,
+                            checkIcon = list(yes = icon("ok", lib = "glyphicon")),
+                            selected = req(input$v1.mvp))
+    
+    updateRadioGroupButtons(session, "v3.vcs", 
+                            i18n()$t("Is all of the code stored in a version control repository that makes branches, pull requests, and integration easy?"),
+                            choices = YN.choices,
+                            checkIcon = list(yes = icon("ok", lib = "glyphicon")),
+                            selected = req(input$v3.vcs))
+    
+    updateRadioGroupButtons(session, "v4.release", 
+                            i18n()$t("Can releases be made frequently and/ or on a time-based schedule?"),
+                            choices = YN.choices,
+                            checkIcon = list(yes = icon("ok", lib = "glyphicon")),
+                            selected = req(input$v4.release))
+    
+    updateRadioGroupButtons(session, "v4.announce", 
+                            i18n()$t("Is there a mechanism for making announcements that anyone in the organization can follow and search? (Examples: Slack/ email)"),
+                            choices = YN.choices,
+                            checkIcon = list(yes = icon("ok", lib = "glyphicon")),
+                            selected = req(input$v4.announce))
+    
+    updateRadioGroupButtons(session, "v4.search", 
+                            i18n()$t("Is there a mechanism to record discussions so that new guest contributors can search for all previous Q-A and internal team decisions? (Examples: Slack/ online forum)"),
+                            choices = YN.choices,
+                            checkIcon = list(yes = icon("ok", lib = "glyphicon")),
+                            selected = req(input$v4.search))
+    
     })
+  
+  
+    # observeEvent(input$selected_language, {
+    #     # This print is just for demonstration
+    #     print(paste("Language change!", input$selected_language))
+    #     # Here is where we update language in session
+    #     shiny.i18n()::update_lang(session, input$selected_language)
+    # })
     
     # Mapping Likert Scale responses to numbers
-    maplist = list("Strongly disagree" = 1, "Disagree" = 2, "Neither agree nor disagree" = 3, "Agree" = 4, "Strongly agree" = 5)
+    maplist = list("Strongly disagree" = 1, "Disagree" = 2, "Neither agree nor disagree" = 3, "Agree" = 4, "Strongly agree" = 5, ' 非常不同意' = 1, ' 不同意' = 2, ' 不同意也不反对' = 3, ' 同意' = 4, ' 非常同意' = 5 )
     
     # Create Data Frame from responses
     getData <- eventReactive(input$go, {
@@ -280,12 +157,12 @@ server <- function(input, output, session) {
         
         data <- as.data.frame(matrix(c(v1, v2, v3, v4, v5, v6), ncol=6))
         # Setup the text settings
-        seedProduct = i18n$t("Seed Product")
-        stakeholders = i18n$t("Multiple potential stakeholders")
-        contribution = i18n$t("Ease of Contribution")
-        tools = i18n$t("Appropriate tools & practices")
-        readiness  = i18n$t("Team Readiness for InnerSource")
-        management = i18n$t("Management Support")
+        seedProduct = i18n()$t("Seed Product")
+        stakeholders = i18n()$t("Multiple potential stakeholders")
+        contribution = i18n()$t("Ease of Contribution")
+        tools = i18n()$t("Appropriate tools & practices")
+        readiness  = i18n()$t("Team Readiness for InnerSource")
+        management = i18n()$t("Management Support")
         colnames = c(seedProduct, stakeholders, contribution, tools, readiness, management)
         
         colnames(data) <- colnames
@@ -327,8 +204,8 @@ server <- function(input, output, session) {
         if (!input$alert){
             sendSweetAlert(
                 session = session,
-                title = i18n$t("Thank you!"),
-                text = i18n$t("See the Result Below"),
+                title = i18n()$t("Thank you!"),
+                text = i18n()$t("See the Result Below"),
                 type = "success"
             )}
     })
@@ -344,7 +221,7 @@ server <- function(input, output, session) {
                     #custom the grid
                     cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,5,1), cglwd=0.8,
                     #custom labels
-                    vlcex=1.2, title = i18n$t("Visual Breakdown of Fitness Score")
+                    vlcex=1.2, title = i18n()$t("Visual Breakdown of Fitness Score")
         )
     })
     
@@ -356,9 +233,9 @@ server <- function(input, output, session) {
             fontFamily =  "wqy-microhei"
         }
         #setup the display text
-        technology = i18n$t("Technology compatibility")
-        process = i18n$t("Process compatibility")
-        people = i18n$t("People compatibility")
+        technology = i18n()$t("Technology compatibility")
+        process = i18n()$t("Process compatibility")
+        people = i18n()$t("People compatibility")
         
         getData() %>% slice(3) %>% t() %>% as.data.frame() %>% add_rownames() %>% mutate(Category=factor(c(rep(technology,2), rep(process,2), rep(people,2)))) %>% arrange(V1) %>% mutate(rowname=factor(rowname, rowname)) %>%
             ggplot( aes(x=rowname, y=V1, color=Category)) +
@@ -366,7 +243,7 @@ server <- function(input, output, session) {
             geom_point(size=5) +
             coord_flip() +
             theme_ipsum(base_family=fontFamily, base_size = 14)  + 
-            ylim(0,5) + ylab(i18n$t("score")) + xlab("")+ ggtitle(i18n$t("Visual Breakdown of Fitness Score")) +
+            ylim(0,5) + ylab(i18n()$t("score")) + xlab("")+ ggtitle(i18n()$t("Visual Breakdown of Fitness Score")) +
             theme( text = element_text(size=14),
                    legend.position="bottom",
                    legend.title = element_blank(),
@@ -379,8 +256,8 @@ server <- function(input, output, session) {
     # render output 
     
     output$score <- renderText({
-        titleLeftText = i18n$t("The Estimated Fitness Score of this Project is:")
-        titleRightText = i18n$t("; (Range: 0 to 10)")
+        titleLeftText = i18n()$t("The Estimated Fitness Score of this Project is:")
+        titleRightText = i18n()$t("; (Range: 0 to 10)")
         paste(titleLeftText, getScore(), titleRightText)
     })
     
@@ -419,12 +296,203 @@ server <- function(input, output, session) {
                         #custom the grid
                         cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,5,1), cglwd=0.8,
                         #custom labels
-                        vlcex=1.2, title = i18n$t("Visual Breakdown of Fitness Score")
+                        vlcex=1.2, title = i18n()$t("Visual Breakdown of Fitness Score")
             )
             print( gen_lollipopplot() )
             dev.off()
         }
     )
+    
+    # UI 
+    output$page_content <- renderUI({
+      fluidPage(
+        div(style = "float: right;",
+            selectInput('selected_language',
+                        i18n()$t("Change language"),
+                        choices = translator$get_languages(),
+                        selected = input$selected_language),
+        ),
+        
+        # Application title
+        title = i18n()$t("InnerSource Project Fitness Assessment"),
+        useSweetAlert(),
+        
+        h1(i18n()$t("InnerSource Project Fitness Assessment Questionnaire")),
+        
+        # h5(i18n()$t('.')),
+        
+        # All Questions are listed below
+        
+        h3(i18n()$t("Technology compatibility")),
+        br(),
+        
+        fluidRow(
+          column(3, sliderTextInput("v2.collab",
+                                    label = i18n()$t("The project has functionality that is likely to be interesting to developers outside the original development team"),
+                                    grid = T, force_edges = TRUE,
+                                    choices = i18n()$t(likert.choices))),
+          
+          column(3, radioGroupButtons("v1.mvp", 
+                                      i18n()$t("Is it a Minimum Viable Product that works and can be experimented on?"),
+                                      choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
+                                      checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
+          
+          column(3, sliderTextInput("v1.value", 
+                                    label = i18n()$t("The project is valuable to the company"),
+                                    grid = T, force_edges = TRUE,
+                                    choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v2.use",label = i18n()$t("The project (or some modules) could be widely used by other teams in the company who might depend on it"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+        ),
+        br(),
+        fluidRow(
+          
+          column(12, checkboxGroupButtons("v1.prob",label = i18n()$t("Is any of the following true for the project? (choose all applicable options)"),
+                                          choices = list("It has to satisfy very strict requirements" = 1, 
+                                                         "It has confidential IP that should not be exposed" = 2, 
+                                                         "It is in the critical path of important deliverables" = 1),           justified = TRUE,
+                                          checkIcon = list(
+                                            yes = tags$i(class = "fa fa-check-square", 
+                                                         style = "color: steelblue"),
+                                            no = tags$i(class = "fa fa-square-o", 
+                                                        style = "color: steelblue")))),
+          
+          
+          column(12, checkboxGroupButtons("v2.plus",label = NULL,
+                                          choices = list('It has useful features/modules that might prevent effort wasted on "Reinventing the Wheel"' = 1, 
+                                                         "Maintainers are receptive to external contributions" = 1
+                                          ),   justified = TRUE,
+                                          checkIcon = list(
+                                            yes = tags$i(class = "fa fa-check-square", 
+                                                         style = "color: steelblue"),
+                                            no = tags$i(class = "fa fa-square-o", 
+                                                        style = "color: steelblue")))),
+        ),
+        br(),
+        
+        h3(i18n()$t("Process compatibility")),
+        br(),
+        
+        fluidRow(
+          column(3, sliderTextInput("v3.mod",label =   i18n()$t("The project is modular enough to make changes easy and safe to make"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v3.doc",label = i18n()$t("All ancillary resources (Adequate Code Documentation, Discussion forum, Bug Tracker, Wiki etc.) are set up for the project"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v3.con",label = i18n()$t("The project has clear and easy-to-find Contribution guidelines, documentation on development environment setup, running tests, etc. making it easy to contribute to"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, radioGroupButtons("v3.vcs", 
+                                      i18n()$t("Is all of the code stored in a version control repository that makes branches, pull requests, and integration easy?"),
+                                      choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
+                                      checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
+          
+        ),
+        br(),
+        fluidRow(
+          column(3, radioGroupButtons("v4.release", 
+                                      i18n()$t("Can releases be made frequently and/ or on a time-based schedule?"),
+                                      choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
+                                      checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
+          
+          
+          column(3, sliderTextInput("v4.common",label = i18n()$t("The project uses specialized tools/ framework that outsiders need to learn before they can contribute"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, radioGroupButtons("v4.announce", 
+                                      i18n()$t("Is there a mechanism for making announcements that anyone in the organization can follow and search? (Examples: Slack/ email)"),
+                                      choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
+                                      checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
+          
+          column(3, radioGroupButtons("v4.search", 
+                                      i18n()$t("Is there a mechanism to record discussions so that new guest contributors can search for all previous Q-A and internal team decisions? (Examples: Slack/ online forum)"),
+                                      choices = list("Yes" = 1, "No" = 0), justified = TRUE, selected = 0,
+                                      checkIcon = list(yes = icon("ok", lib = "glyphicon")))),
+        ),
+        
+        br(),
+        h3(i18n()$t("People compatibility")),
+        br(),
+        fluidRow(
+          column(3, sliderTextInput("v5.accept",label = i18n()$t("Team Members are  willing to accept code from outsiders and make code changes based on their feedback"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v5.see",label = i18n()$t("Team Members are ok with having outsiders see their less-than-perfect code"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v5.conv",label = i18n()$t("Team Members are ok with having to conduct conversations (that are sometimes difficult) with outsiders about accepting and rejecting their contributions"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v5.mentor",label = i18n()$t("Team Members are ready to mentor and/or learning to mentor contributors from other teams"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices)))
+        ),
+        
+        br(),
+        fluidRow(
+          column(3, sliderTextInput("v5.work",label = i18n()$t("Team Members are ready to work with external contributors for fixing any defects on the contributed code"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v5.doc",label = i18n()$t("Team Members are willing to create and maintain documentation for external contributors"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v5.forum",label = i18n()$t("Team Members are willing to participate in online forums and answer questions patiently (instead of having offline conversations)"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v5.review",label = i18n()$t("Team Members are willing to do code reviews for external contributors' submissions"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+        ),
+        
+        br(),
+        fluidRow(
+          column(3, sliderTextInput("v6.flex",label = i18n()$t("Management is willing to support flexible work requirements and value the time spent on cross-departmental contributions"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v6.merit",label = i18n()$t("Management supports a meritocratic philosophy that appreciates good contributions from all quarters"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v6.fail",label = i18n()$t("Management understands the difficulties of a cultural change and can accept experimentation, failure, and repositioning to a reasonable extent"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+          
+          column(3, sliderTextInput("v6.reward",label = i18n()$t("Management is willing to recognize and incentivize the efforts for making InnerSource Successful"),
+                                    grid = T, force_edges = TRUE, choices = i18n()$t(likert.choices))),
+        ),
+        
+        # Action Buttons are listed below
+        
+        br(),
+        fluidRow(
+          column(2, switchInput(
+            inputId = "alert", label = i18n()$t("Disable Alerts")
+          )),
+          column(2, offset = 1, actionBttn("go",label = i18n()$t("Check Results"), 
+                                           style = "pill", color = "danger",icon = icon("eye"))),
+          column(2, offset = 1, downloadBttn("saveData",label = i18n()$t("Download Scores"), 
+                                             style = "jelly", color = "success")),
+          column(2, offset = 1, downloadBttn("savePlot", label = i18n()$t("Download Plots"), style = "jelly")),
+        ),    
+        
+        # Show Project Score
+        br(),
+        fluidRow(
+          fluidRow(column(7, offset = 2, h3(textOutput("score"))))
+          
+        ),
+        # For testing: comment if not used
+        # fluidRow(column(12, verbatimTextOutput("test"))),
+        
+        # Show Plots
+        
+        br(),
+        fluidRow(
+          column(6,plotOutput("radarplot") ),
+          column(6, plotOutput("lolipop"))
+        )
+        
+        
+        
+      )})
 }
 
 # Run the application 

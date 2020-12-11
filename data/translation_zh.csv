@@ -3,16 +3,16 @@ Change language, 选择语言
 InnerSource Project Fitness Assessment, 内源项目适应度评估
 InnerSource Project Fitness Assessment Questionnaire, 内源项目适应度评估问题
 Technology compatibility, 技术兼容性
-The project have functionality that is likely to be interesting to developers outside the original development team, 该项目具有的功能可能会让原始开发团队之外的开发人员感兴趣
+The project has functionality that is likely to be interesting to developers outside the original development team, 该项目具有的功能可能会让原始开发团队之外的开发人员感兴趣
 ., 选择清单的翻译- Strongly disagree: 非常不同意; Disagree: 不同意; Neither agree nor disagree: 不同意也不反对; Agree: 同意; Strongly agree: 非常同意; yes: 是; no: 无
 Is it a Minimum Viable Product that works and can be experimented on?,它是一个最小的可行产品，它可以对进行实验？
 The project is valuable to the company, 该项目对公司很有价值
 The project (or some modules) could be widely used by other teams in the company who might depend on it, 该项目（或某些模块）可能会被公司中可能依赖该项目的其他团队广泛使用
-Is any of the following true for the project? (choose all applicable options), 该项目是否符合以下任何条件？ （选择所有适用的选项）; 选项清单 - It has to satisfy very strict requirements: 它必须满足非常严格的要求; It has confidential IP that should not be exposed: 它具有不应泄露的机密知识产权; It is in the critical path of important deliverables: 它处于重要交付物的关键路径中; It has useful features/modules that might prevent effort wasted on "Reinventing the Wheel": 它具有有用的功能/模块，可以避免在“重新发明轮子”上浪费精力; Maintainers are receptive to external contributions: 维护者接受外部贡献
+Is any of the following true for the project? (choose all applicable options), 该项目是否符合以下任何条件？ （选择所有适用的选项）
 It has to satisfy very strict requirements, 它必须满足非常严格的要求
 It has confidential IP that should not be exposed, 它具有不应泄露的机密知识产权
 It is in the critical path of important deliverables, 它处于重要交付物的关键路径中
-It has useful features/modules that might prevent effort wasted on "Reinventing the Wheel", 它具有有用的功能/模块，可以避免在“重新发明轮子”上浪费精力
+It has useful features/modules that might prevent effort wasted on 'Reinventing the Wheel', "它具有有用的功能/模块，可以避免在“重新发明轮子”上浪费精力"
 Maintainers are receptive to external contributions, 维护者接受外部贡献
 The project is modular enough to make changes easy and safe to make, 该项目具有足够的模块化，可以轻松，安全地进行更改
 "All ancillary resources (Adequate Code Documentation, Discussion forum, Bug Tracker, Wiki etc.) are set up for the project", 为项目设置了所有初始资源（充足的代码文档，讨论论坛，问题跟踪工具，知识库等）
@@ -31,7 +31,7 @@ Is there a mechanism for making announcements that anyone in the organization ca
 "Team Members are willing to participate in online forums and answer questions patiently (instead of having offline conversations)", 团队成员愿意参加在线论坛并耐心回答问题（而不是进行离线对话）
 "Team Members are willing to do code reviews for external contributors' submissions", 团队成员愿意为外部贡献者进行代码审查
 "Management is willing to support flexible work requirements and value the time spent on cross-departmental contributions", 管理层愿意支持灵活的工作要求，并重视花在跨部门活动上的时间
-"Management supports a meritocratic philosophy that appreciates good contributions from all corners", 管理层支持一种精英主义(meritocratic)哲学，赞赏各方面的杰出贡献
+"Management supports a meritocratic philosophy that appreciates good contributions from all quarters", 管理层支持一种精英主义(meritocratic)哲学，赞赏各方面的杰出贡献
 "Management understands the difficulties of a cultural change and can accept experimentation, failure, and repositioning to a reasonable extent", 管理层了解文化变革的困难，可以在合理范围内接受试验，失败和重新定位
 "Management is willing to recognize and incentivize the efforts for making InnerSource Successful", 管理层愿意认可并奖励为使内源成功所做的努力
 Disable Alerts, 禁用问题提醒
@@ -52,3 +52,10 @@ Team Readiness for InnerSource, 团队内源准备度
 Management Support, 管理支持
 The Estimated Fitness Score of this Project is:,该项目的适应度估计得分为：
 ; (Range: 0 to 10), ; (范围：0至10)
+Strongly disagree, 非常不同意
+Disagree, 不同意
+Neither agree nor disagree, 不同意也不反对
+Agree, 同意
+Strongly agree, 非常同意
+Yes, 是
+No, 无
