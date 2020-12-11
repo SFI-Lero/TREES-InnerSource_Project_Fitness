@@ -279,19 +279,16 @@ server <- function(input, output, session) {
                   as.numeric(maplist[input$v6.reward])+ as.numeric(maplist[input$v6.fail]))/4
         
         data <- as.data.frame(matrix(c(v1, v2, v3, v4, v5, v6), ncol=6))
-        # If-else for language translation
+        # Setup the text settings
+        seedProduct = i18n$t("Seed Product")
+        stakeholders = i18n$t("Multiple potential stakeholders")
+        contribution = i18n$t("Ease of Contribution")
+        tools = i18n$t("Appropriate tools & practices")
+        readiness  = i18n$t("Team Readiness for InnerSource")
+        management = i18n$t("Management Support")
+        colnames = c(seedProduct, stakeholders, contribution, tools, readiness, management)
         
-        if (input$selected_language == 'en'){
-        colnames(data) <- c("Seed Product", "Multiple potential stakeholders", 
-                            "Ease of Contribution", "Appropriate tools & practices", 
-                            "Team Readiness for InnerSource", 
-                            "Management Support" )
-        } else if (input$selected_language == '中文'){
-            colnames(data) <- c("起始产品", "多个潜在利益相关者", 
-                                "易贡献", "适当的工具和做法", 
-                                "团队准备为InnerSource", 
-                                "管理支持" )
-        }
+        colnames(data) <- colnames
         
         # To use the fmsb package, I have to add 2 lines to the dataframe: the max and min of each topic to show on the plot!
         data <- rbind(rep(5,6) , rep(0,6) , data)
@@ -354,13 +351,21 @@ server <- function(input, output, session) {
     # If-else for language translation
     gen_lollipopplot <- reactive({
         showtext_auto()
-        if (input$selected_language == 'en'){
-        getData() %>% slice(3) %>% t() %>% as.data.frame() %>% add_rownames() %>% mutate(Category=factor(c(rep("Technology compatibility",2), rep("Process compatibility",2), rep("People compatibility",2)))) %>% arrange(V1) %>% mutate(rowname=factor(rowname, rowname)) %>%
+        fontFamily = "sans"
+        if (input$selected_language == '中文'){
+           fontFamily =  "wqy-microhei"
+        }
+        #setup the display text
+        technology = i18n$t("Technology compatibility")
+        process = i18n$t("Process compatibility")
+        people = i18n$t("People compatibility")
+        
+        getData() %>% slice(3) %>% t() %>% as.data.frame() %>% add_rownames() %>% mutate(Category=factor(c(rep(technology,2), rep(process,2), rep(people,2)))) %>% arrange(V1) %>% mutate(rowname=factor(rowname, rowname)) %>%
             ggplot( aes(x=rowname, y=V1, color=Category)) +
             geom_segment( aes(x=rowname ,xend=rowname, y=0, yend=V1), color="grey") +
             geom_point(size=5) +
             coord_flip() +
-            theme_ipsum(base_family="sans", base_size = 14)  + 
+            theme_ipsum(base_family=fontFamily, base_size = 14)  + 
             ylim(0,5) + ylab(i18n$t("score")) + xlab("")+ ggtitle(i18n$t("Visual Breakdown of Fitness Score")) +
             theme( text = element_text(size=14),
                    legend.position="bottom",
@@ -368,32 +373,15 @@ server <- function(input, output, session) {
                    panel.grid.minor.y = element_blank(),
                    panel.grid.major.y = element_blank()
             ) 
-        } else if (input$selected_language == '中文'){
-            getData() %>% slice(3) %>% t() %>% as.data.frame() %>% add_rownames() %>% mutate(Category=factor(c(rep("技术兼容性",2), rep("工艺兼容性",2), rep("人员兼容性",2)))) %>% arrange(V1) %>% mutate(rowname=factor(rowname, rowname)) %>%
-                ggplot( aes(x=rowname, y=V1, color=Category)) +
-                geom_segment( aes(x=rowname ,xend=rowname, y=0, yend=V1), color="grey") +
-                geom_point(size=5) +
-                coord_flip() +
-                # Font family for showing Chinese Characters
-                theme_ipsum(base_family="wqy-microhei", base_size = 14)  + 
-                ylim(0,5) + ylab(i18n$t("score")) + xlab("")+ ggtitle(i18n$t("Visual Breakdown of Fitness Score")) +
-                theme( text = element_text(size=14),
-                       legend.position="bottom",
-                       legend.title = element_blank(),
-                       panel.grid.minor.y = element_blank(),
-                       panel.grid.major.y = element_blank()
-                ) 
-        }
+        
     })
     
     # render output 
     
-    output$score <- renderText({ 
-        if (input$selected_language == 'en'){
-            paste("The Estimated Fitness Score of this Project is:", getScore(), "; (Range: 0 to 10)")
-        } else if (input$selected_language == '中文'){
-            paste("该项目的估计健身得分为：", getScore(), "; (范围：0至10)")
-        }
+    output$score <- renderText({
+        titleLeftText = i18n$t("The Estimated Fitness Score of this Project is:")
+        titleRightText = i18n$t("; (Range: 0 to 10)")
+        paste(titleLeftText, getScore(), titleRightText)
     })
     
     output$radarplot <- renderPlot({
