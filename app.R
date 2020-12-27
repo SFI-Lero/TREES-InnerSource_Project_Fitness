@@ -221,7 +221,9 @@ server <- function(input, output, session) {
                     #custom the grid
                     cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,5,1), cglwd=0.8,
                     #custom labels
-                    vlcex=1.2, title = i18n()$t("Visual Breakdown of Fitness Score")
+                    vlcex=1.2, 
+                    title = paste0(i18n()$t("Visual Breakdown of Fitness Score"),
+                                   '---',input$name)
         )
     })
     
@@ -243,7 +245,9 @@ server <- function(input, output, session) {
             geom_point(size=5) +
             coord_flip() +
             theme_ipsum(base_family=fontFamily, base_size = 14)  + 
-            ylim(0,5) + ylab(i18n()$t("score")) + xlab("")+ ggtitle(i18n()$t("Visual Breakdown of Fitness Score")) +
+            ylim(0,5) + ylab(i18n()$t("score")) + xlab("")+ 
+            ggtitle(paste0(i18n()$t("Visual Breakdown of Fitness Score"), '---', 
+                           input$name)) +
             theme( text = element_text(size=14),
                    legend.position="bottom",
                    legend.title = element_blank(),
@@ -275,9 +279,13 @@ server <- function(input, output, session) {
             paste("data", Sys.Date(), as.numeric(input$go) ,"0.csv", sep="_")
         },
         content = function(file) {
+            projectname = i18n()$t("Project Name")
+            score = i18n()$t("Final Score")
             dataout = getData()
             dataout = dataout %>% slice(3)
-            dataout$Final.Score = getScore()
+            # dataout$Final.Score = getScore()
+            dataout = cbind(projectname=input$name, score= getScore(),dataout)
+            colnames(dataout)[1:2] = c(projectname, score)
             write.csv(dataout, file, row.names = F)
         }
     )
@@ -296,7 +304,9 @@ server <- function(input, output, session) {
                         #custom the grid
                         cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,5,1), cglwd=0.8,
                         #custom labels
-                        vlcex=1.2, title = i18n()$t("Visual Breakdown of Fitness Score")
+                        vlcex=1.2, 
+                        title = paste0(i18n()$t("Visual Breakdown of Fitness Score"),
+                                                  '---',input$name)
             )
             print( gen_lollipopplot() )
             dev.off()
@@ -319,7 +329,8 @@ server <- function(input, output, session) {
         
         h1(i18n()$t("InnerSource Project Fitness Assessment Questionnaire")),
         
-        # h5(i18n()$t('.')),
+        textInput("name", label = h3(i18n()$t("Enter Project Name")), value = ""),
+        
         
         # All Questions are listed below
         
