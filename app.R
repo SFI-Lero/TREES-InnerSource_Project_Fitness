@@ -210,6 +210,15 @@ server <- function(input, output, session) {
             )}
     })
     
+    observeEvent(input$info, {
+        sendSweetAlert(
+            session = session,
+            title = "What it all means",
+            text = 'Any project can be developed in InnerSource style, but some projects are more ready for it than others. According to Research, the "Fitness" of a project can be measured by checking if the project has the necessary qualities to attract enough developers and build a community around it, if the tools and processes allow for collaborative development, and if the project maintainers are ready for taking on the challenges of InnerSource style development. We call it the Project-Process-People model. We focus on two facets of each of the factors and show the fitness of the project in these 6 dimensions.\n Further Reading: https://ieeexplore.ieee.org/document/6809709, https://innersourcecommons.org/assets/files/InnerSourceChecklist.pdf',
+            type = "info"
+        )
+    })
+    
     # generate plots
     
     gen_radarplot <- reactive({
@@ -235,7 +244,7 @@ server <- function(input, output, session) {
             fontFamily =  "wqy-microhei"
         }
         #setup the display text
-        technology = i18n()$t("Technology compatibility")
+        technology = i18n()$t("Project compatibility")
         process = i18n()$t("Process compatibility")
         people = i18n()$t("People compatibility")
         
@@ -334,7 +343,7 @@ server <- function(input, output, session) {
         
         # All Questions are listed below
         
-        h3(i18n()$t("Technology compatibility")),
+        h3(i18n()$t("Project compatibility")),
         br(),
         
         fluidRow(
@@ -474,14 +483,20 @@ server <- function(input, output, session) {
         
         br(),
         fluidRow(
-          column(2, switchInput(
+          column(1, switchInput(
             inputId = "alert", label = i18n()$t("Disable Alerts")
           )),
           column(2, offset = 1, actionBttn("go",label = i18n()$t("Check Results"), 
                                            style = "pill", color = "danger",icon = icon("eye"))),
-          column(2, offset = 1, downloadBttn("saveData",label = i18n()$t("Download Scores"), 
+          column(2, offset = 0, actionBttn("info",label = i18n()$t("Explanation"), 
+                                           style = "pill", color = "primary",icon = icon("info-circle"))),
+          
+          column(3, offset = 1, downloadBttn("saveData",label = i18n()$t("Download Scores"), 
                                              style = "jelly", color = "success")),
-          column(2, offset = 1, downloadBttn("savePlot", label = i18n()$t("Download Plots"), style = "jelly")),
+          
+          column(2, offset = 0, downloadBttn("savePlot", label = i18n()$t("Download Plots"), style = "jelly", color = 'royal')),
+          
+          
         ),    
         
         # Show Project Score

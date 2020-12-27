@@ -2,7 +2,7 @@ en,中文
 Change language, 选择语言
 InnerSource Project Fitness Assessment, 内源项目适应度评估
 InnerSource Project Fitness Assessment Questionnaire, 内源项目适应度评估问题
-Technology compatibility, 技术兼容性
+Project compatibility, 项目相容性
 The project has functionality that is likely to be interesting to developers outside the original development team, 该项目具有的功能可能会让原始开发团队之外的开发人员感兴趣
 ., 选择清单的翻译- Strongly disagree: 非常不同意; Disagree: 不同意; Neither agree nor disagree: 不同意也不反对; Agree: 同意; Strongly agree: 非常同意; yes: 是; no: 无
 Is it a Minimum Viable Product that works and can be experimented on?,它是一个最小的可行产品，它可以对进行实验？
@@ -62,3 +62,4 @@ No, 无
 Enter Project Name,输入项目名称
 Project Name,项目名称
 Final Score,最终分数
+Explanation,说明
