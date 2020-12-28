@@ -214,7 +214,7 @@ server <- function(input, output, session) {
         sendSweetAlert(
             session = session,
             title = "What it all means",
-            text = 'Any project can be developed in InnerSource style, but some projects are more ready for it than others. According to Research, the "Fitness" of a project can be measured by checking if the project has the necessary qualities to attract enough developers and build a community around it, if the tools and processes allow for collaborative development, and if the project maintainers are ready for taking on the challenges of InnerSource style development. We call it the Project-Process-People model. We focus on two facets of each of the factors and show the fitness of the project in these 6 dimensions.\n Further Reading: https://ieeexplore.ieee.org/document/6809709, https://innersourcecommons.org/assets/files/InnerSourceChecklist.pdf',
+            text = 'Any project can be developed in InnerSource style, but some projects are more suitable candidates than others. The "fitness" of a project can be measured by assessing whether the project has the necessary qualities to attract enough developers to build a community around it, that the tools and processes allow for collaborative development, and that the project maintainers are ready to face the challenges of InnerSource style development. We label this as the the Project-Process-People model. We suggest two sub-factors within each which overall provides six dimensions to measure the fitness of candidate projects.\n Further Reading: https://ieeexplore.ieee.org/document/6809709, https://innersourcecommons.org/checklist/',
             type = "info"
         )
     })
