@@ -319,8 +319,62 @@ server <- function(input, output, session) {
             )
             print( gen_lollipopplot() )
             dev.off()
+            
         }
     )
+    
+    # saving to local storage
+    observeEvent(input$local, {
+      tryCatch({
+      main.dir = getwd()
+      dir.create(file.path(main.dir, input$name ))
+      setwd(file.path(main.dir, input$name))
+      tym = as.integer(Sys.time())
+      #data
+      filename = sprintf('Data_%s_%s.csv',input$name,tym)
+      projectname = i18n()$t("Project Name")
+      score = i18n()$t("Final Score")
+      dataout = getData()
+      dataout = dataout %>% slice(3)
+      dataout = cbind(projectname=input$name, score= getScore(),dataout)
+      colnames(dataout)[1:2] = c(projectname, score)
+      write.csv(dataout, filename, row.names = F)
+      
+      #plots
+      pfname = sprintf('Plot_%s_%s.pdf',input$name,tym)
+      pdf(pfname, width = 12, height = 10)
+      par(mar=c(0,0,4,0))
+      radarchart( df=getData(), axistype=1, seg = 5,
+                  #custom polygon
+                  pcol=rgb(0.2,0.5,0.5,0.9) , pfcol=rgb(0.2,0.5,0.5,0.5) , plwd=4 , 
+                  #custom the grid
+                  cglcol="grey", cglty=1, axislabcol="grey", caxislabels=seq(0,5,1), cglwd=0.8,
+                  #custom labels
+                  vlcex=1.2, 
+                  title = paste0(i18n()$t("Visual Breakdown of Fitness Score"),
+                                 '---',input$name)
+      )
+      print( gen_lollipopplot() )
+      dev.off()
+      setwd(main.dir)
+      
+      #confirmation
+      sendSweetAlert(
+        session = session,
+        title = i18n()$t("Thank you!"),
+        text = i18n()$t("The File has been saved"),
+        type = "success"
+      )},
+      error=function(cond) {
+        sendSweetAlert(
+          session = session,
+          title = i18n()$t("ERROR!"),
+          text = paste(i18n()$t("Something went wrong"), cond),
+          type = "error"
+        )
+      })
+      
+    })
     
     # UI 
     output$page_content <- renderUI({
@@ -490,8 +544,11 @@ server <- function(input, output, session) {
                                            style = "pill", color = "danger",icon = icon("eye"))),
           column(2, offset = 0, actionBttn("info",label = i18n()$t("Explanation"), 
                                            style = "pill", color = "primary",icon = icon("info-circle"))),
-          
-          column(3, offset = 1, downloadBttn("saveData",label = i18n()$t("Download Scores"), 
+          column(2, offset = 0, actionBttn("local",
+                                           label = i18n()$t("Save results"), 
+                                           style = "pill", color = "warning",
+                                           icon = icon("save"))),
+          column(2, offset = 0, downloadBttn("saveData",label = i18n()$t("Download Scores"), 
                                              style = "jelly", color = "success")),
           
           column(2, offset = 0, downloadBttn("savePlot", label = i18n()$t("Download Plots"), style = "jelly", color = 'royal')),
