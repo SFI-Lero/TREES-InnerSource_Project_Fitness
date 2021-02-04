@@ -213,8 +213,8 @@ server <- function(input, output, session) {
     observeEvent(input$info, {
         sendSweetAlert(
             session = session,
-            title = "What it all means",
-            text = 'Any project can be developed in InnerSource style, but some projects are more suitable candidates than others. The "fitness" of a project can be measured by assessing whether the project has the necessary qualities to attract enough developers to build a community around it, that the tools and processes allow for collaborative development, and that the project maintainers are ready to face the challenges of InnerSource style development. We label this as the the Project-Process-People model. We suggest two sub-factors within each which overall provides six dimensions to measure the fitness of candidate projects.\n Further Reading: https://ieeexplore.ieee.org/document/6809709, https://innersourcecommons.org/checklist/',
+            title = i18n()$t("What it all means"),
+            text = i18n()$t("Any project can be developed in InnerSource style, but some projects are more suitable candidates than others.The 'fitness' of a project can be measured by assessing whether the project has the necessary qualities to attract enough developers to build a community around it, that the tools and processes allow for collaborative development, and that the project maintainers are ready to face the challenges of InnerSource style development. We label this as the  Project-Process-People model. We suggest two sub-factors within each which overall provides six dimensions to measure the fitness of candidate projects. Further Reading: https://ieeexplore.ieee.org/document/6809709, https://innersourcecommons.org/checklist/"),
             type = "info"
         )
     })

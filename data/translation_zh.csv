@@ -67,3 +67,5 @@ The File has been saved,文件已保存
 Something went wrong,出了些问题
 ERROR!,错误！
 Save results,保存结果
+What it all means,解释
+"Any project can be developed in InnerSource style, but some projects are more suitable candidates than others.The 'fitness' of a project can be measured by assessing whether the project has the necessary qualities to attract enough developers to build a community around it, that the tools and processes allow for collaborative development, and that the project maintainers are ready to face the challenges of InnerSource style development. We label this as the  Project-Process-People model. We suggest two sub-factors within each which overall provides six dimensions to measure the fitness of candidate projects. Further Reading: https://ieeexplore.ieee.org/document/6809709, https://innersourcecommons.org/checklist/","任何项目都可以在内源风格有所发展，但有些项目是更合适的人选比其他人。 该项目的'健身'，可以通过评估该项目是否具有必备的素质，以吸引足够的开发者建立一个社区围绕它来衡量，这些工具和方法允许协同发展，该项目的维护者准备好面对 内源样式开发的挑战。 我们将其标记为Project-Process-People模型。 我们建议在每个子要素中使用两个子要素，这些子要素总体上提供六个维度来衡量候选项目的适用性。进一步阅读：https://ieeexplore.ieee.org/document/6809709，https://innersourcecommons.org/checklist/"
