@@ -2,7 +2,7 @@ en,中文
 Change language, 选择语言
 InnerSource Project Fitness Assessment, 内源项目适应度评估
 InnerSource Project Fitness Assessment Questionnaire, 内源项目适应度评估问题
-Project compatibility, 项目相容性
+Project compatibility, 项目可行性
 The project has functionality that is likely to be interesting to developers outside the original development team, 该项目具有的功能可能会让原始开发团队之外的开发人员感兴趣
 ., 选择清单的翻译- Strongly disagree: 非常不同意; Disagree: 不同意; Neither agree nor disagree: 不同意也不反对; Agree: 同意; Strongly agree: 非常同意; yes: 是; no: 无
 Is it a Minimum Viable Product that works and can be experimented on?,它是一个最小的可行产品，它可以对进行实验？
@@ -39,17 +39,17 @@ Check Results, 查看结果
 Download Scores, 下载分数
 Download Plots, 下载图表
 "Thank you!", 谢谢！
-See the Result Below, 查看结果下面的
+See the Result Below, 查看下面结果
 Visual Breakdown of Fitness Score, 适应性得分的视觉细分
 score, 得分
-Process compatibility, 流程兼容性
-People compatibility, 人员兼容性
+Process compatibility, 流程可行性
+People compatibility, 人员可行性
 Seed Product, 种子产品
 Multiple potential stakeholders, 多个潜在利益相关者
 Ease of Contribution, 易贡献
 Appropriate tools & practices, 适当的工具和实践
 Team Readiness for InnerSource, 团队内源准备度
-Management Support, 管理支持
+Management Support, 管理层支持
 The Estimated Fitness Score of this Project is:,该项目的适应度估计得分为：
 ; (Range: 0 to 10), ; (范围：0至10)
 Strongly disagree, 非常不同意
@@ -68,4 +68,4 @@ Something went wrong,出了些问题
 ERROR!,错误！
 Save results,保存结果
 What it all means,解释
-"Any project can be developed in InnerSource style, but some projects are more suitable candidates than others.The 'fitness' of a project can be measured by assessing whether the project has the necessary qualities to attract enough developers to build a community around it, that the tools and processes allow for collaborative development, and that the project maintainers are ready to face the challenges of InnerSource style development. We label this as the  Project-Process-People model. We suggest two sub-factors within each which overall provides six dimensions to measure the fitness of candidate projects. Further Reading: https://ieeexplore.ieee.org/document/6809709, https://innersourcecommons.org/checklist/","任何项目都可以在内源风格有所发展，但有些项目是更合适的人选比其他人。 该项目的'健身'，可以通过评估该项目是否具有必备的素质，以吸引足够的开发者建立一个社区围绕它来衡量，这些工具和方法允许协同发展，该项目的维护者准备好面对 内源样式开发的挑战。 我们将其标记为Project-Process-People模型。 我们建议在每个子要素中使用两个子要素，这些子要素总体上提供六个维度来衡量候选项目的适用性。进一步阅读：https://ieeexplore.ieee.org/document/6809709，https://innersourcecommons.org/checklist/"
+"Any project can be developed in InnerSource style, but some projects are more suitable candidates than others.The 'fitness' of a project can be measured by assessing whether the project has the necessary qualities to attract enough developers to build a community around it, that the tools and processes allow for collaborative development, and that the project maintainers are ready to face the challenges of InnerSource style development. We label this as the  Project-Process-People model. We suggest two sub-factors within each which overall provides six dimensions to measure the fitness of candidate projects. Further Reading: https://ieeexplore.ieee.org/document/6809709, https://innersourcecommons.org/checklist/",“任何项目都可以采用内源方式开发，但有些项目比其他项目更适采用内源。通过评估项目是否具备必要的质量来吸引足够的开发者来围绕它建立一个社区来衡量项目的“适合性”。工具和流程允许协作开发，项目维护者已经准备好迎接内源开发方式的挑战。我们将此标记为项目-流程-人员模型。我们建议每个子因素中有两个子因素，它们总体上提供了六个维度来衡量候选项目的适应性。进一步阅读：https://ieeexplore.ieee.org/document/6809709, https://innersourcecommons.org/checklist/"，
